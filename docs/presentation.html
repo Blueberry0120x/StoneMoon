@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stone Moons — CSS &amp; Visual Design | Jenn Duyen Nguyen</title>
+<style>
+  :root {
+    --bg:      #050816;
+    --bg2:     #07101e;
+    --bg3:     #0a1628;
+    --gold:    #d4af37;
+    --gold2:   #b8972a;
+    --gold3:   #f0d060;
+    --sarah:   #5287c5;
+    --moon:    #cc1030;
+    --laurel:  #c8a200;
+    --green:   #4CAF50;
+    --t0:      #f0ead8;
+    --t1:      #c8bfa0;
+    --t2:      #887e64;
+    --t3:      #4a4535;
+    --card:    #0d1b30;
+    --card2:   #111e32;
+    --border:  #1a2d4a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--t0);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-bar {
+    background: #030710;
+    border-bottom: 1px solid #1a2d4a;
+    padding: 0 24px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--t2);
+    letter-spacing: 0.5px;
+  }
+  .site-bar a { color: var(--gold2); text-decoration: none; }
+  .site-bar a:hover { color: var(--gold); }
+  .site-bar-sep { color: var(--t3); }
+
+  .hero {
+    background: linear-gradient(180deg, #030b1a 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(80,50,180,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold2);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--t0);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--t2);
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── WINEGLASS SVG BADGE ── */
+  .wg-badge {
+    display: inline-block;
+    margin: 24px auto 0;
+  }
+
+  /* ── ROLE TAG ── */
+  .role-strip {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .role-tag {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .tag-sarah  { color: var(--sarah);  border-color: rgba(82,135,197,0.4);  background: rgba(82,135,197,0.08); }
+  .tag-moon   { color: #ee3355;       border-color: rgba(204,16,48,0.4);   background: rgba(204,16,48,0.08); }
+  .tag-laurel { color: var(--laurel); border-color: rgba(200,162,0,0.4);   background: rgba(200,162,0,0.08); }
+  .tag-css    { color: var(--gold);   border-color: rgba(212,175,55,0.4);  background: rgba(212,175,55,0.08); }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 820px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold2);
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 4px;
+    padding: 3px 9px;
+    flex-shrink: 0;
+  }
+  .section-head h2 {
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .card-accent-sarah  { border-left: 3px solid var(--sarah); }
+  .card-accent-moon   { border-left: 3px solid var(--moon); }
+  .card-accent-laurel { border-left: 3px solid var(--laurel); }
+  .card-accent-green  { border-left: 3px solid var(--green); }
+  .card-accent-gold   { border-left: 3px solid var(--gold); }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--t0);
+    margin-bottom: 14px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    letter-spacing: 0.3px;
+  }
+  .card h3 .contribution-num {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold2);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .card p {
+    color: var(--t1);
+    font-size: 15.5px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ── CONTEXT BOX ── */
+  .context-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .context-box p {
+    color: var(--t2);
+    font-size: 14px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .context-box p strong { color: var(--t1); font-style: normal; }
+
+  /* ── QUOTE ── */
+  blockquote {
+    border-left: 3px solid var(--gold2);
+    margin: 20px 0;
+    padding: 14px 20px;
+    background: rgba(212,175,55,0.04);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote p {
+    color: var(--t1) !important;
+    font-style: italic;
+    font-size: 15px !important;
+  }
+
+  /* ── TECH TAGS ── */
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+  }
+  .tech-tag {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--t2);
+  }
+
+  /* ── COLOR SWATCH ROW ── */
+  .swatch-row {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--t2);
+  }
+  .swatch-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin: 20px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 14px;
+    padding-left: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold2);
+    border: 2px solid var(--bg);
+  }
+  .timeline-date {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--gold2);
+    margin-bottom: 2px;
+  }
+  .timeline-text {
+    font-size: 14px;
+    color: var(--t2);
+    line-height: 1.6;
+  }
+  .timeline-text strong { color: var(--t1); }
+
+  /* ── BIO CARD ── */
+  .bio-card {
+    background: linear-gradient(135deg, #0d1b30 0%, #07101e 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .bio-name {
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gold3);
+    margin-bottom: 6px;
+  }
+  .bio-title {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sarah);
+    margin-bottom: 18px;
+  }
+  .bio-text {
+    color: var(--t1);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── CLOSING STATEMENT ── */
+  .closing {
+    background: linear-gradient(135deg, #0a0e1a 0%, #050816 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .closing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(212,175,55,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing h2 {
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .closing p {
+    color: var(--t1);
+    font-size: 16px;
+    line-height: 1.85;
+    max-width: 680px;
+    margin: 0 auto 16px;
+  }
+  .closing p:last-child { margin-bottom: 0; }
+
+  /* ── TEAM STRIP ── */
+  .team-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+    justify-content: center;
+  }
+  .team-member {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 18px;
+    text-align: center;
+  }
+  .team-member .tm-name {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--t0);
+  }
+  .team-member .tm-role {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 10.5px;
+    color: var(--t3);
+    margin-top: 2px;
+  }
+  .team-member.highlight .tm-name { color: var(--gold3); }
+  .team-member.highlight .tm-role { color: var(--gold2); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--t3);
+    letter-spacing: 0.5px;
+  }
+  footer a { color: var(--t2); text-decoration: none; }
+  footer a:hover { color: var(--gold2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .card { padding: 20px 18px; }
+    .closing { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<div class="site-bar">
+  <a href="../index.html">Stone Moons</a>
+  <span class="site-bar-sep">›</span>
+  <span>CSS &amp; Visual Design</span>
+  <span class="site-bar-sep">·</span>
+  <a href="universe.html">3D Universe ↗</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Stone Moons · WSUV Digital Technology &amp; Culture · 2023–2025</div>
+  <h1><em>CSS &amp; Visual Design</em></h1>
+  <h1 style="font-style:normal;font-size:clamp(18px,3vw,26px);color:var(--t1);margin-top:6px;">Jenn Duyen Nguyen</h1>
+
+  <!-- Wine-glass SVG inline -->
+  <div class="wg-badge">
+    <svg width="120" height="140" viewBox="0 0 420 490" xmlns="http://www.w3.org/2000/svg" aria-label="Wine-glass narrative structure">
+      <path d="M 85,52 C 68,140 118,245 158,262 L 192,262 C 232,245 282,140 265,52 Z" fill="#07101e" stroke="#1a2d4a" stroke-width="1.5"/>
+      <path d="M 97,128 C 80,205 120,250 158,262 L 192,262 C 230,250 270,205 253,128 Z" fill="#cc1030" opacity="0.88"/>
+      <path d="M 85,52 C 70,78 74,100 97,128 L 253,128 C 276,100 280,78 265,52 Z" fill="#2d6fd4" opacity="0.82"/>
+      <ellipse cx="175" cy="52" rx="90" ry="15" fill="#3a7bd5" opacity="0.45"/>
+      <ellipse cx="175" cy="52" rx="90" ry="15" fill="none" stroke="#5a9bff" stroke-width="2.5"/>
+      <ellipse cx="175" cy="128" rx="78" ry="9" fill="#ff3355" opacity="0.18"/>
+      <ellipse cx="175" cy="128" rx="78" ry="9" fill="none" stroke="#dd2244" stroke-width="1.2" opacity="0.45"/>
+      <rect x="163" y="262" width="24" height="120" rx="5" fill="#c8a200" opacity="0.87"/>
+      <ellipse cx="175" cy="396" rx="88" ry="16" fill="#c8a200" opacity="0.87"/>
+      <ellipse cx="175" cy="396" rx="88" ry="16" fill="none" stroke="#e8c400" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="role-strip">
+    <span class="role-tag tag-css">CSS Architecture</span>
+    <span class="role-tag tag-css">Visual Design</span>
+    <span class="role-tag tag-sarah">Storyspace Recreation</span>
+    <span class="role-tag tag-moon">Navigation Design</span>
+  </div>
+
+  <p class="hero-sub">Presentation script — contribution overview for academic report</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page">
+
+  <!-- CONTEXT -->
+  <div class="context-box">
+    <p>
+      <strong>Stone Moons</strong> is a hypertext novel by Deena Larsen, originally created in Storyspace on a 1997 Macintosh with 491 nodes and 6,000 multi-destination links. It was declared dead at CyberMountain in 1999 when it overran its buffers. From 2023–2025, a team of WSUV Digital Technology &amp; Culture students resurrected it into Twine Harlowe 3.3.5 — 533 passages, 192,382 words. Jenn Duyen Nguyen led all CSS and visual design work.
+    </p>
+  </div>
+
+  <!-- BIO -->
+  <div class="bio-card">
+    <div class="bio-name">Jenn Duyen Nguyen</div>
+    <div class="bio-title">CSS &amp; Visual Design · Stone Moons Resurrection Team</div>
+    <div class="bio-text">
+      Jenn is a Seattle-based front-end web developer with a passion for crafting engaging digital experiences.
+      Her work is driven by a vision — to connect, inspire, and create a story. Every project is her opportunity
+      to make a positive impact and leave an unforgettable mark on the virtual canvas. She offers services in
+      UX/UI design and web development, and believes in equitable and equally accessible technologies that put
+      people at the center.
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section-head">
+    <span class="section-num">TEAM</span>
+    <h2>The Resurrection Team</h2>
+  </div>
+  <div class="team-strip">
+    <div class="team-member"><div class="tm-name">Deena Larsen</div><div class="tm-role">Author</div></div>
+    <div class="team-member highlight"><div class="tm-name">Jenn Duyen Nguyen</div><div class="tm-role">CSS &amp; Visual Design</div></div>
+    <div class="team-member"><div class="tm-name">Quinn Carrick</div><div class="tm-role">Twine Modal Code</div></div>
+    <div class="team-member"><div class="tm-name">Evan Leyden</div><div class="tm-role">Animation</div></div>
+    <div class="team-member"><div class="tm-name">Claire Leyden</div><div class="tm-role">Transcription</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION: THE CHALLENGE -->
+  <div class="section-head">
+    <span class="section-num">CONTEXT</span>
+    <h2>The Challenge</h2>
+  </div>
+
+  <div class="card card-accent-gold">
+    <p>
+      When Stone Moons was resurrected from the 1997 Macintosh, the team faced a question that had nothing to do with code:
+      <em>What should this work look like?</em> StorySpace had a very specific visual language. Nodes appeared as labeled
+      rectangular boxes on a spatial canvas. Readers navigated by clicking named links — a popup would list every possible
+      destination — and the structure of the story was <em>visible</em>. You could see the shape of the world.
+    </p>
+    <p>
+      Twine doesn't work that way. Twine presents one passage at a time in a reader's browser. The spatial map — the
+      wine-glass topology Deena designed — would be invisible to readers unless someone built it back.
+      That was Jenn's assignment.
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CONTRIBUTIONS -->
+  <div class="section-head">
+    <span class="section-num">CONTRIBUTIONS</span>
+    <h2>What Jenn Built</h2>
+  </div>
+
+  <!-- Contribution 1 -->
+  <div class="card card-accent-sarah">
+    <h3><span class="contribution-num">01</span> The Map — Recreating the Storyspace Canvas</h3>
+    <p>
+      Jenn designed and hand-coded a CSS spatial map that recreates the visual environment of StorySpace's original
+      1999 node canvas. Every passage in Stone Moons is represented as a box on this map — styled to mirror the look
+      and proportions of a StorySpace lexia node: a rectangular card with a title bar, a horizontal divider line,
+      and the node label rendered in compact ellipsized text, exactly as it appeared on Deena's 1997 Macintosh.
+    </p>
+    <p>
+      She placed all 533 passages by hand using absolute CSS coordinates — Sarah's 249 nodes arranged along the rim
+      and outside of the glass, Laurel's 53 passages clustered at the base in four concentric spiral layers, The Moon's
+      passages filling the interior. The resulting map is a 2D scrollable canvas where readers can see the full
+      wine-glass shape of the novel before they read a single word.
+    </p>
+    <p>
+      To keep the three narrative voices distinct at a glance, Jenn built a full color-coded system:
+    </p>
+    <div class="swatch-row">
+      <div class="swatch"><div class="swatch-dot" style="background:#5287c5"></div>Sarah — blue, the color of correspondence, struggle, the outside world</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#c6c620"></div>Laurel (yellow) — facilitated voice, pre-verbal thought</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#577441"></div>Laurel (green) — second mode of Laurel's inner world</div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1a1a1a; border:1px solid #444"></div>The Moon — black, the mythic, the unseen, the predatory deity</div>
+    </div>
+    <p style="margin-top:14px">
+      This color system runs through every border, shadow, header, and link chip — creating a visual grammar readers
+      learn intuitively as they move through the piece.
+    </p>
+    <div class="tech-tags">
+      <span class="tech-tag">CSS Custom Properties</span>
+      <span class="tech-tag">Absolute Positioning</span>
+      <span class="tech-tag">40+ Node IDs</span>
+      <span class="tech-tag">Storyspace Mirroring</span>
+    </div>
+  </div>
+
+  <!-- Contribution 2 -->
+  <div class="card card-accent-moon">
+    <h3><span class="contribution-num">02</span> The Popup — Replicating Named Links</h3>
+    <p>
+      One of Stone Moons' defining features is its named links — Deena used the names of the links themselves as part
+      of the story. In StorySpace, clicking an anchor word brought up a dialog box listing every possible destination
+      by name, each name carrying its own joke, irony, or subtext. Replicating that behavior in a modern browser,
+      without JavaScript, was one of Jenn's key design problems.
+    </p>
+    <p>
+      She solved it with a pure-CSS popup system. Hovering over any multi-destination link in Stone Moons causes a
+      styled tooltip to appear — built entirely with CSS using the <code style="font-family:monospace;font-size:13px;color:var(--laurel)">.og-link</code>,
+      <code style="font-family:monospace;font-size:13px;color:var(--laurel)">.popup</code>, and
+      <code style="font-family:monospace;font-size:13px;color:var(--laurel)">::before</code> triangle arrow pattern.
+      The popup fades in smoothly with a <code style="font-family:monospace;font-size:13px;color:var(--laurel)">transition: opacity 0.5s ease</code>,
+      floats above the text with absolute positioning, and is styled to feel like a StorySpace dialog.
+    </p>
+    <blockquote>
+      <p>This was her first original contribution — visible in the earliest archived CSS build from January 23, 2025.</p>
+    </blockquote>
+    <div class="tech-tags">
+      <span class="tech-tag">Pure CSS Popup</span>
+      <span class="tech-tag">CSS :hover</span>
+      <span class="tech-tag">::before Triangle Arrow</span>
+      <span class="tech-tag">opacity transition</span>
+    </div>
+  </div>
+
+  <!-- Contribution 3 -->
+  <div class="card card-accent-laurel">
+    <h3><span class="contribution-num">03</span> Navigation Image Library</h3>
+    <p>
+      Stone Moons uses images for navigation — not text links alone. The reader's choices are presented as visual
+      navigation elements: <em>Continue / Delve Deeper</em>, <em>Higher / Lower</em>, <em>Go Back / Press On</em>,
+      <em>Moon / Sarah</em>, and more. Jenn designed and integrated a library of 30+ navigation image components —
+      each class specifying the exact aspect ratio, flexbox layout, and pixel-precise dimensions to render the
+      navigation mosaics cleanly at every screen size.
+    </p>
+    <p>
+      Each image is embedded directly in the Twine HTML as a base64 asset — no external dependencies, no CDN,
+      no broken links after 30 years. The work is fully self-contained because of how Jenn structured the CSS
+      image system.
+    </p>
+    <p>
+      She then built 8+ responsive breakpoints calibrated to specific screen width ranges — from 700px to 3100px —
+      so that paired navigation images remain pixel-aligned regardless of the reader's screen size or resolution.
+    </p>
+    <div class="tech-tags">
+      <span class="tech-tag">30+ Image Classes</span>
+      <span class="tech-tag">Base64 Embedded Assets</span>
+      <span class="tech-tag">Flexbox Layout</span>
+      <span class="tech-tag">8+ Media Query Breakpoints</span>
+      <span class="tech-tag">700px – 3100px Range</span>
+    </div>
+  </div>
+
+  <!-- Contribution 4 -->
+  <div class="card card-accent-green">
+    <h3><span class="contribution-num">04</span> Twine Override Layer</h3>
+    <p>
+      Twine's Harlowe engine ships with a dark default theme. Stone Moons needed the opposite: the white-and-gray
+      aesthetic of StorySpace's reading pane. Jenn wrote a comprehensive override layer targeting Harlowe's native
+      elements — restyling the entire reading experience from the ground up:
+    </p>
+    <ul style="color:var(--t1);font-size:15px;line-height:2;padding-left:24px;margin:10px 0;">
+      <li>Passage boxes: gray border, subtle box-shadow, minimum width of 824px — the constrained reading window of StorySpace</li>
+      <li>Links: red, always — matching StorySpace's classic hyperlink color from 1999</li>
+      <li>The map passage itself: no border, no padding, no shadow — a clean canvas behind the node layout</li>
+      <li>Sidebar z-index management so the map overlay renders above Twine's default chrome</li>
+    </ul>
+    <p>
+      This override layer is what makes Stone Moons <em>feel</em> like it was born in 1999, even though it runs in a
+      2025 browser.
+    </p>
+    <div class="tech-tags">
+      <span class="tech-tag">tw-story override</span>
+      <span class="tech-tag">tw-passage override</span>
+      <span class="tech-tag">tw-link: red</span>
+      <span class="tech-tag">Map exception rule</span>
+    </div>
+  </div>
+
+  <!-- Contribution 5 -->
+  <div class="card card-accent-gold">
+    <h3><span class="contribution-num">05</span> Design Token System &amp; Responsive Architecture</h3>
+    <p>
+      Jenn built the entire CSS system using design tokens — CSS custom properties defined at <code style="font-family:monospace;font-size:13px;color:var(--laurel)">:root</code>.
+      Colors, sizes, and character palettes are defined once and referenced everywhere. This means the visual design
+      can be updated in one place and cascade across all 533 passages.
+    </p>
+    <p>
+      She also architected dark mode support in the token structure, with commented-out dark variants ready for
+      future implementation.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">JAN 23, 2025</div>
+        <div class="timeline-text"><strong>First CSS build</strong> — 1,191 chars. Basic tw-story/tw-passage + .sarah + pure-CSS popup. The popup system was her first original contribution.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">JAN 28, 2025</div>
+        <div class="timeline-text"><strong>Modal iteration</strong> — popup refined, tw-link red added, early .CDD layout with absolute positioning.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">FEB 22, 2025</div>
+        <div class="timeline-text"><strong>Flexbox image system</strong> — navigation image layout introduced.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">MAR 7, 2025</div>
+        <div class="timeline-text"><strong>Full system</strong> — 82,686 chars of CSS, base64 images embedded, all breakpoints, complete image library present.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">MAY 2025</div>
+        <div class="timeline-text"><strong>Master build</strong> — ~1.98MB self-contained Twine HTML. Dual-layer CSS (map styles + desktop styles). 533 passages, 30+ image classes, full color-coded narrative system. 22,000+ characters of hand-crafted CSS.</div>
+      </div>
+    </div>
+    <div class="tech-tags">
+      <span class="tech-tag">CSS Custom Properties</span>
+      <span class="tech-tag">:root design tokens</span>
+      <span class="tech-tag">Dark mode ready</span>
+      <span class="tech-tag">Jan → May 2025 growth</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CLOSING STATEMENT -->
+  <div class="closing">
+    <h2>Bookend — Closing Statement</h2>
+    <p>
+      Jenn's work on Stone Moons is a rare kind of technical contribution: it is simultaneously <em>archaeological</em>
+      and <em>architectural</em>. She studied what StorySpace looked like — its node boxes, its named-link dialogs,
+      its spatial canvas — and then rebuilt that environment in a technology it was never designed for, from the
+      ground up, in pure CSS.
+    </p>
+    <p>
+      The result is that readers who open Stone Moons in 2025 see the work <em>as Deena envisioned it in 1999</em> —
+      the wine-glass shape of the narrative visible, the three voices color-coded and distinct, the named links
+      hovering in their original dialog-style popups, the navigation images rendered at pixel-perfect precision
+      on every screen.
+    </p>
+    <p>
+      Stone Moons was declared dead at CyberMountain in 1999. Jenn's design work is part of what brought it back —
+      not just functional, but visually alive.
+    </p>
+    <p style="margin-top:24px;color:var(--t3);font-style:italic;font-size:14px;">
+      — Transitions to: Closing Remarks, Deena Larsen
+    </p>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  Stone Moons · Washington State University Vancouver · Digital Technology &amp; Culture ·
+  <a href="https://www.deenalarsen.net/stone/">deenalarsen.net/stone</a> ·
+  <a href="universe.html">3D Universe ↗</a>
+</footer>
+
+</body>
+</html>
